@@ -67,11 +67,12 @@ public class Item {
             decrementQuality = decrementQuality * 2;
         }
 
-        //décrémente la qualité jusqu'a 0
         if (decrementQuality > 0) {
+            //décrémente la qualité jusqu'a 0
             this.quality = Math.max(this.quality - decrementQuality, 0);
         }
         else {
+            //incrémente la qualité jusqu'a 50
             this.quality = Math.max(this.quality - decrementQuality, 50);
 
         }
