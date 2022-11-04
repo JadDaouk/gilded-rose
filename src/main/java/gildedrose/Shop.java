@@ -1,5 +1,7 @@
 package gildedrose;
 
+import gildedrose.Items.Item;
+
 import java.util.List;
 
 public class Shop
