@@ -1,13 +1,14 @@
-import gildedrose.Shop;
+package gildedrose;
 
+import com.sun.tools.javac.util.Assert;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest {
+
     @Test
-    void should_build() {
-        Shop shop = new Shop();
-        assertEquals(shop.getClass(), Shop.class);
+    void should_test() {
+        Assert.check(false);
     }
 }
