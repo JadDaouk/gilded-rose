@@ -1,12 +1,89 @@
 package gildedrose;
 
 public class Item {
-    private String name;
-    private int sellIn;
-    private int quality;
-    private boolean conjured;
+    public String name;
+    public int sellIn;
+    public int quality;
 
-    //    private String name;
+
+    public Item(String name, int sellIn, int quality) {
+        this.name = name;
+        this.sellIn = sellIn;
+        this.quality = quality;
+    }
+
+    public void update() {
+
+        if (isSulfuras()) return;
+
+        this.sellIn -= 1;
+
+        if (isAgedBrie()) {
+            this.quality++;
+        } else if (isBackstagePasses()) {
+            this.quality++;
+
+            if (this.sellIn <= 10) {
+                this.quality++;
+            }
+            if (this.sellIn <= 5) {
+                this.quality++;
+            }
+            if (this.sellIn <= 0) {
+                this.quality = 0;
+            }
+        } else if(isConjured()) {
+            this.quality -= 2;
+        }
+        else {
+            this.quality -= 1;
+        }
+        if (this.sellIn <= 0 && isConjured()) {
+            this.quality -= 2;
+        }
+        else if (this.sellIn <= 0) {
+            this.quality -= 1;
+        }
+
+        cielQuality(50);
+        floorQuality(0);
+        floorSellIn(0);
+    }
+
+    private boolean isBackstagePasses() {
+        return "Backstage passes".equals(this.name);
+    }
+
+    private boolean isAgedBrie() {
+        return "Aged Brie".equals(this.name);
+    }
+
+    private boolean isSulfuras() {
+        return "Sulfuras".equals(this.name);
+    }
+    public boolean isConjured() {
+        return name.contains("Conjured");
+    }
+    private void cielQuality(int quality) {
+        if (this.quality > quality)
+            this.quality = quality;
+    }
+
+    private void floorQuality(int quality) {
+        if (this.quality < quality) {
+            this.quality = 0;
+        }
+    }
+
+    private void floorSellIn(int sellIn) {
+        if (this.sellIn < sellIn) {
+            this.sellIn = 0;
+        }
+    }
+}
+
+
+//    private String name;
 //    private int sellIn;
 //    private int quality;
 //    private boolean conjured;
@@ -91,4 +168,3 @@ public class Item {
 //    public String getName() {
 //        return name;
 //    }
-}
