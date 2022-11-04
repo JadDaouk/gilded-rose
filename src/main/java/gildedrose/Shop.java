@@ -1,39 +1,23 @@
 package gildedrose;
 
 import gildedrose.Items.Item;
+import gildedrose.Items.Repositories.ItemRepository;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Shop
 {
-    public List<Item> inventory;
+    public ItemRepository itemRepository;
 
-    public Shop(List<Item> inventory) {
-        this.inventory = inventory;
+    public Shop(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
     }
 
     public void updateQuality() {
-        for (Item item : inventory) {
+        ArrayList<Item> items = itemRepository.GetInventory();
+        for (Item item : items) {
             item.update();
         }
+        itemRepository.SaveInventory(items);
     }
-
-
-
-//	private List<Item> stock = new ArrayList<Item>();
-//
-//	public void endDay()
-//	{
-//		stock.stream().forEach(e -> e.updateQuality());
-//	}
-//
-//	public void addProduct(Item item)
-//	{
-//		stock.add(item);
-//	}
-//
-//	public void sellProduct(Item item)
-//	{
-//		stock.remove(stock.indexOf(item));
-//	}
 }
