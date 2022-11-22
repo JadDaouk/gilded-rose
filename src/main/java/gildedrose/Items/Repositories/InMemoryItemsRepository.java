@@ -1,10 +1,11 @@
 package gildedrose.Items.Repositories;
 
 import gildedrose.Items.*;
+import gildedrose.SellItemRequest;
 
 import java.util.ArrayList;
 
-public class InMemoryItemsRepository implements ItemRepository {
+public class InMemoryItemsRepository implements ItemGateway {
 
     ArrayList<Item> items = new ArrayList<>();
 
@@ -32,9 +33,9 @@ public class InMemoryItemsRepository implements ItemRepository {
         this.items = items;
     }
 
-    public Item findItem(String type, int quality) {
+    public Item findItem(SellItemRequest sellItemRequest) {
         for (Item item : items) {
-            if (item.name.equals(type) && item.quality == quality) {
+            if (item.name.equals(sellItemRequest.getType()) && item.quality == sellItemRequest.getQuality()) {
                 return item;
             }
         }

@@ -2,7 +2,6 @@ package gildedrose.Items;
 
 public class GenericItem extends Item {
 
-
     public GenericItem(String name, int sellIn, int quality, int basePrice) {
         super(name, sellIn, quality, basePrice);
     }

@@ -4,14 +4,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ConsoleUI consoleUi = new ConsoleUI();
+        ShopOutputBoundary shopOutputBoundary = new ShopOutputBoundary();
 
-        consoleUi.displayInventory();
-        consoleUi.updateInventory();
-        consoleUi.displayInventory();
+        //shopOutputBoundary.displayInventory();
+        shopOutputBoundary.updateInventory();
+       // shopOutputBoundary.displayInventory();
 
-        consoleUi.displayBalance();
-        consoleUi.sellItem("Generic", 1);
-        consoleUi.displayBalance();
+        //shopOutputBoundary.displayBalance();
+        shopOutputBoundary.sellItem("Generic", 1);
+        //shopOutputBoundary.displayBalance();
     }
 }

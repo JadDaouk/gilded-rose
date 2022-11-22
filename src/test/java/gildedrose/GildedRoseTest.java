@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class GildedRoseTest {
 
-    Shop shop;
+    ShopInputBoundary shopInputBoundary;
     InMemoryItemsRepository repository;
 
 
@@ -15,8 +15,8 @@ class GildedRoseTest {
     void setup() {
 
         repository = new InMemoryItemsRepository();
-        shop = new Shop(repository);
-        shop.updateInventory();
+        shopInputBoundary = new ShopInputBoundary(repository);
+        shopInputBoundary.updateInventory();
     }
 
     @Test
@@ -84,21 +84,24 @@ class GildedRoseTest {
 
     @Test
     void should_NotSellItemIfNotInInventory() {
-        shop.sellItem("Not in Inventory", 7);
-        Assert.check(shop.getBalance() == 50);
+        SellItemRequest sellItemRequest = new SellItemRequest("Not in Inventory", 7);
+        shopInputBoundary.sellItem(sellItemRequest);
+        Assert.check(shopInputBoundary.getBalance() == 50);
     }
 
     @Test
     void should_NotSellItemIfNotCouponQuality() {
-        shop.sellItem("Generic to Sell", 2);
-        Assert.check(shop.getBalance() == 50);
+        SellItemRequest sellItemRequest = new SellItemRequest("Generic to Sell", 2);
+        shopInputBoundary.sellItem(sellItemRequest);
+        Assert.check(shopInputBoundary.getBalance() == 50);
     }
 
     @Test
     void should_SellItem() {
-        shop.sellItem("Generic to Sell", 7);
+        SellItemRequest sellItemRequest = new SellItemRequest("Generic to Sell", 7);
+        shopInputBoundary.sellItem(sellItemRequest);
         Assert.check(repository.getInventory().stream().noneMatch(item -> item.name.equals("Generic to Sell") && item.quality == 7));
-        Assert.check(shop.getBalance() == 60);
+        Assert.check(shopInputBoundary.getBalance() == 60);
     }
 
 }

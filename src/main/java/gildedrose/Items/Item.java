@@ -34,7 +34,8 @@ public abstract class Item {
         }
     }
 
-    protected int getValue(){
+    public int getValue() {
         return this.basePrice;
     }
+
 }

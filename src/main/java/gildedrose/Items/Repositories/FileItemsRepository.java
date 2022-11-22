@@ -1,10 +1,11 @@
 package gildedrose.Items.Repositories;
 
 import gildedrose.Items.Item;
+import gildedrose.SellItemRequest;
 
 import java.util.ArrayList;
 
-public class FileItemsRepository implements ItemRepository {
+public class FileItemsRepository implements ItemGateway {
 
     public ArrayList<Item> getInventory() {
         return null;
@@ -14,7 +15,7 @@ public class FileItemsRepository implements ItemRepository {
 
     }
 
-    public Item findItem(String type, int quality) {
+    public Item findItem(SellItemRequest sellItemRequest) {
         return null;
     }
 

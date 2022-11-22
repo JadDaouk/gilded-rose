@@ -1,15 +1,16 @@
 package gildedrose.Items.Repositories;
 
 import gildedrose.Items.Item;
+import gildedrose.SellItemRequest;
 
 import java.util.ArrayList;
 
-public interface ItemRepository {
+public interface ItemGateway {
 
     ArrayList<Item> getInventory();
 
     void saveInventory(ArrayList<Item> items);
 
-    Item findItem(String type, int quality);
+    Item findItem(SellItemRequest sellItemRequest);
 
 }
