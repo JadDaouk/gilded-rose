@@ -15,7 +15,7 @@ class GildedRoseTest {
     void setup() {
 
         repository = new InMemoryItemsRepository();
-        shopInputBoundary = new ShopInputBoundary(repository);
+        shopInputBoundary = new ShopInterator(repository); // ici
         shopInputBoundary.updateInventory();
     }
 

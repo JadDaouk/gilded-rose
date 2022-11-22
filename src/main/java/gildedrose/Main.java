@@ -1,17 +1,18 @@
 package gildedrose;
 
+import gildedrose.Items.Repositories.InMemoryItemsRepository;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        ShopOutputBoundary shopOutputBoundary = new ShopOutputBoundary();
+        ShopInterator shop = new ShopInterator(new InMemoryItemsRepository());
 
-        //shopOutputBoundary.displayInventory();
-        shopOutputBoundary.updateInventory();
-       // shopOutputBoundary.displayInventory();
+        //shop.shopOutputBoundary.displayInventory();
 
-        //shopOutputBoundary.displayBalance();
-        shopOutputBoundary.sellItem("Generic", 1);
-        //shopOutputBoundary.displayBalance();
+        shop.updateInventory();
+
+        SellItemRequest sellItemRequest = new SellItemRequest("Generic", 1);
+        shop.sellItem(sellItemRequest);
     }
 }

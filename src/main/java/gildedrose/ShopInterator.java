@@ -2,15 +2,15 @@ package gildedrose;
 
 import gildedrose.Items.Repositories.ItemGateway;
 
-public abstract class ShopInterator {
+public class ShopInterator extends ShopInputBoundary{
 
-    protected ShopOutputBoundary console = new ShopOutputBoundary();
-    protected ItemGateway itemGateway;
 
-    public ShopInterator(ItemGateway itemGateway)
+
+    protected ShopInterator(ItemGateway itemGateway)
     {
-        this.itemGateway = itemGateway;
+        super(itemGateway);
     }
+
 
 
 }
