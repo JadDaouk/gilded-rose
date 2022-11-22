@@ -6,13 +6,17 @@ import java.util.ArrayList;
 
 public class FileItemsRepository implements ItemRepository {
 
-        public ArrayList<Item> GetInventory() {
-            return null;
-        }
+    public ArrayList<Item> getInventory() {
+        return null;
+    }
 
-        public void SaveInventory(ArrayList<Item> items) {
+    public void saveInventory(ArrayList<Item> items) {
 
-        }
+    }
+
+    public Item findItem(String type, int quality) {
+        return null;
+    }
 
 }
 

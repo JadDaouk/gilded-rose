@@ -2,8 +2,8 @@ package gildedrose.Items;
 
 public class EventItem extends Item {
 
-    public EventItem(String name, int sellIn, int quality) {
-        super(name, sellIn, quality);
+    public EventItem(String name, int sellIn, int quality, int basePrice) {
+        super(name, sellIn, quality, basePrice);
     }
 
     public void update() {

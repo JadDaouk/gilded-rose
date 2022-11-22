@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 public interface ItemRepository {
 
-    ArrayList<Item> GetInventory();
+    ArrayList<Item> getInventory();
 
-    void SaveInventory(ArrayList<Item> items);
+    void saveInventory(ArrayList<Item> items);
 
+    Item findItem(String type, int quality);
 
 }

@@ -3,8 +3,8 @@ package gildedrose.Items;
 public class AggingItem extends Item {
 
 
-    public AggingItem(String name, int sellIn, int quality) {
-        super(name, sellIn, quality);
+    public AggingItem(String name, int sellIn, int quality, int basePrice) {
+        super(name, sellIn, quality, basePrice);
     }
 
     public void update() {
