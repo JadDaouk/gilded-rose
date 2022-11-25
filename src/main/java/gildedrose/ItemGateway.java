@@ -1,7 +1,7 @@
-package gildedrose.Items.Repositories;
+package gildedrose;
 
-import gildedrose.Items.Item;
-import gildedrose.console.SellItemRequest;
+import gildedrose.item.Item;
+import gildedrose.shop.input.SellItemRequest;
 
 import java.util.ArrayList;
 

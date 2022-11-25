@@ -1,9 +1,12 @@
 package gildedrose.shop;
 
-import gildedrose.Items.Item;
-import gildedrose.Items.Repositories.ItemGateway;
-import gildedrose.console.ItemResponse;
-import gildedrose.console.SellItemRequest;
+import gildedrose.balance.repositories.Balance;
+import gildedrose.item.Item;
+import gildedrose.ItemGateway;
+import gildedrose.shop.output.ShopItemResponse;
+import gildedrose.shop.input.SellItemRequest;
+import gildedrose.shop.input.ShopInputBoundary;
+import gildedrose.shop.output.ShopOutputBoundary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +16,13 @@ public class ShopInteractor implements ShopInputBoundary {
     private ItemGateway itemGateway;
     private ShopOutputBoundary shopOutputBoundary;
 
-    public ShopInteractor(ItemGateway itemGateway, ShopOutputBoundary shopOutputBoundary) {
+    private Balance balance;
+
+    public ShopInteractor(ItemGateway itemGateway, ShopOutputBoundary shopOutputBoundary, Balance balance) {
         this.itemGateway = itemGateway;
         this.shopOutputBoundary = shopOutputBoundary;
+        this.balance = balance;
     }
-    private int balance = 50;
 
 
     public void updateInventory() {
@@ -35,7 +40,7 @@ public class ShopInteractor implements ShopInputBoundary {
         if (item != null) {
             ArrayList<Item> items = itemGateway.getInventory();
             items.remove(item);
-            balance += item.getValue();
+            Balance.getbalance() += item.getValue();
             itemGateway.saveInventory(items);
         }
 
@@ -44,10 +49,10 @@ public class ShopInteractor implements ShopInputBoundary {
 
     private void convertItemAndDisplay(List<Item> items)
     {
-        List<ItemResponse> itemsResponses = new ArrayList<>();
+        List<ShopItemResponse> itemsResponses = new ArrayList<>();
 
         for (Item i : items) {
-            ItemResponse itemresponse = new ItemResponse(i.name, i.sellIn, i.quality, i.basePrice);
+            ShopItemResponse itemresponse = new ShopItemResponse(i.getName(), i.getSellIn(), i.getQuality(), i.getValue());
             itemsResponses.add(itemresponse);
         }
         shopOutputBoundary.displayInventory(itemsResponses);

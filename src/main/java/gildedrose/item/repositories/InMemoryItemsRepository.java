@@ -1,7 +1,9 @@
-package gildedrose.Items.Repositories;
+package gildedrose.item.repositories;
 
+import gildedrose.ItemGateway;
 import gildedrose.Items.*;
-import gildedrose.console.SellItemRequest;
+import gildedrose.item.*;
+import gildedrose.shop.input.SellItemRequest;
 
 import java.util.ArrayList;
 
@@ -35,7 +37,7 @@ public class InMemoryItemsRepository implements ItemGateway {
 
     public Item findItem(SellItemRequest sellItemRequest) {
         for (Item item : items) {
-            if (item.name.equals(sellItemRequest.getType()) && item.quality == sellItemRequest.getQuality()) {
+            if (item.getName().equals(sellItemRequest.getType()) && item.getQuality() == sellItemRequest.getQuality()) {
                 return item;
             }
         }

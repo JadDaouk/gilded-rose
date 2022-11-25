@@ -1,10 +1,12 @@
-package gildedrose.Items;
+package gildedrose.item;
 
 public abstract class Item {
-    public String name;
-    public int sellIn;
-    public int quality;
-    public int basePrice;
+
+
+    protected String name;
+    protected int sellIn;
+    protected int quality;
+    protected int basePrice;
 
 
     protected Item(String name, int sellIn, int quality, int basePrice) {
@@ -32,6 +34,30 @@ public abstract class Item {
         if (this.sellIn < sellIn) {
             this.sellIn = 0;
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSellIn() {
+        return sellIn;
+    }
+
+    public void setSellIn(int sellIn) {
+        this.sellIn = sellIn;
+    }
+
+    public int getQuality() {
+        return quality;
+    }
+
+    public void setQuality(int quality) {
+        this.quality = quality;
     }
 
     public int getValue() {

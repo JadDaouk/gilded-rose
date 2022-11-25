@@ -1,15 +1,17 @@
 package gildedrose;
 
-import gildedrose.Items.Repositories.InMemoryItemsRepository;
-import gildedrose.console.ConsoleView;
-import gildedrose.console.SellItemRequest;
+import gildedrose.item.repositories.InMemoryItemsRepository;
 import gildedrose.shop.ShopInteractor;
+import gildedrose.shop.output.ShopConsoleView;
+import gildedrose.shop.input.SellItemRequest;
+import gildedrose.shop.output.ShopOutputBoundary;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        ShopInteractor shop = new ShopInteractor(new InMemoryItemsRepository(), new ConsoleView());
+        ShopOutputBoundary view = new ShopConsoleView();
+        ShopInteractor shop = new ShopInteractor(new InMemoryItemsRepository(), view);
 
         //shop.shopOutputBoundary.displayInventory();
 

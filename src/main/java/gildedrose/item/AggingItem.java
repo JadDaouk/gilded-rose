@@ -1,4 +1,4 @@
-package gildedrose.Items;
+package gildedrose.item;
 
 public class AggingItem extends Item {
 
@@ -17,6 +17,6 @@ public class AggingItem extends Item {
     }
 
     public int getValue(){
-        return this.basePrice;
+        return this.getValue();
     }
 }

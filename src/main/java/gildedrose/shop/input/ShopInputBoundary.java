@@ -1,7 +1,5 @@
-package gildedrose.shop;
+package gildedrose.shop.input;
 
-
-import gildedrose.console.SellItemRequest;
 
 public interface ShopInputBoundary {
     void updateInventory();

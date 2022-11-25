@@ -1,12 +1,12 @@
-package gildedrose.console;
+package gildedrose.shop.output;
 
-public class ItemResponse {
+public class ShopItemResponse {
     public String name;
     public int sellIn;
     public int quality;
     public int value;
 
-    public ItemResponse(String name, int sellIn, int quality, int value) {
+    public ShopItemResponse(String name, int sellIn, int quality, int value) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
