@@ -12,5 +12,5 @@ public class FakeConsoleView implements ShopOutputBoundary  {
 
     public void displayBalance(int balance) {
 
-    }}
+    }
 }

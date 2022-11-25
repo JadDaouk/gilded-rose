@@ -3,6 +3,7 @@ package gildedrose;
 import com.sun.tools.javac.util.Assert;
 import gildedrose.Items.Repositories.InMemoryItemsRepository;
 import gildedrose.console.ConsoleView;
+import gildedrose.console.FakeConsoleView;
 import gildedrose.console.SellItemRequest;
 import gildedrose.shop.ShopInteractor;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ class GildedRoseTest {
     void setup() {
 
         repository = new InMemoryItemsRepository();
-        shopInteractor = new ShopInteractor(repository, new ConsoleView());
+        shopInteractor = new ShopInteractor(repository, new FakeConsoleView());
         shopInteractor.updateInventory();
     }
 
