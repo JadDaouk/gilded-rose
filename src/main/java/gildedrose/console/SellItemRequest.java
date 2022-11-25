@@ -1,4 +1,4 @@
-package gildedrose;
+package gildedrose.console;
 
 public class SellItemRequest {
 

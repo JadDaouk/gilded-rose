@@ -1,7 +1,7 @@
 package gildedrose.Items.Repositories;
 
 import gildedrose.Items.Item;
-import gildedrose.SellItemRequest;
+import gildedrose.console.SellItemRequest;
 
 import java.util.ArrayList;
 

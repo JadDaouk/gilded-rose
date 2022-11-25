@@ -2,12 +2,15 @@ package gildedrose;
 
 import com.sun.tools.javac.util.Assert;
 import gildedrose.Items.Repositories.InMemoryItemsRepository;
+import gildedrose.console.ConsoleView;
+import gildedrose.console.SellItemRequest;
+import gildedrose.shop.ShopInteractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class GildedRoseTest {
 
-    ShopInputBoundary shopInputBoundary;
+    ShopInteractor shopInteractor;
     InMemoryItemsRepository repository;
 
 
@@ -15,8 +18,8 @@ class GildedRoseTest {
     void setup() {
 
         repository = new InMemoryItemsRepository();
-        shopInputBoundary = new ShopInterator(repository); // ici
-        shopInputBoundary.updateInventory();
+        shopInteractor = new ShopInteractor(repository, new ConsoleView());
+        shopInteractor.updateInventory();
     }
 
     @Test
@@ -85,23 +88,23 @@ class GildedRoseTest {
     @Test
     void should_NotSellItemIfNotInInventory() {
         SellItemRequest sellItemRequest = new SellItemRequest("Not in Inventory", 7);
-        shopInputBoundary.sellItem(sellItemRequest);
-        Assert.check(shopInputBoundary.getBalance() == 50);
+        shopInteractor.sellItem(sellItemRequest);
+        Assert.check(shopInteractor.getBalance() == 50);
     }
 
     @Test
     void should_NotSellItemIfNotCouponQuality() {
         SellItemRequest sellItemRequest = new SellItemRequest("Generic to Sell", 2);
-        shopInputBoundary.sellItem(sellItemRequest);
-        Assert.check(shopInputBoundary.getBalance() == 50);
+        shopInteractor.sellItem(sellItemRequest);
+        Assert.check(shopInteractor.getBalance() == 50);
     }
 
     @Test
     void should_SellItem() {
         SellItemRequest sellItemRequest = new SellItemRequest("Generic to Sell", 7);
-        shopInputBoundary.sellItem(sellItemRequest);
+        shopInteractor.sellItem(sellItemRequest);
         Assert.check(repository.getInventory().stream().noneMatch(item -> item.name.equals("Generic to Sell") && item.quality == 7));
-        Assert.check(shopInputBoundary.getBalance() == 60);
+        Assert.check(shopInteractor.getBalance() == 60);
     }
 
 }

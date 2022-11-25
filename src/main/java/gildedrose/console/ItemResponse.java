@@ -1,4 +1,4 @@
-package gildedrose;
+package gildedrose.console;
 
 public class ItemResponse {
     public String name;
@@ -6,7 +6,7 @@ public class ItemResponse {
     public int quality;
     public int value;
 
-    protected ItemResponse(String name, int sellIn, int quality, int value) {
+    public ItemResponse(String name, int sellIn, int quality, int value) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;

@@ -1,22 +1,24 @@
-package gildedrose;
+package gildedrose.shop;
 
 import gildedrose.Items.Item;
 import gildedrose.Items.Repositories.ItemGateway;
+import gildedrose.console.ItemResponse;
+import gildedrose.console.SellItemRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ShopInputBoundary {
+public class ShopInteractor implements ShopInputBoundary {
 
-    protected ShopOutputBoundary shopOutputBoundary = new ConsoleView();
+    private ItemGateway itemGateway;
+    private ShopOutputBoundary shopOutputBoundary;
 
-    public ItemGateway itemGateway;
+    public ShopInteractor(ItemGateway itemGateway, ShopOutputBoundary shopOutputBoundary) {
+        this.itemGateway = itemGateway;
+        this.shopOutputBoundary = shopOutputBoundary;
+    }
     private int balance = 50;
 
-    public ShopInputBoundary(ItemGateway itemGateway) {
-
-       this.itemGateway = itemGateway;
-    }
 
     public void updateInventory() {
         ArrayList<Item> items = itemGateway.getInventory();
@@ -42,7 +44,7 @@ public abstract class ShopInputBoundary {
 
     private void convertItemAndDisplay(List<Item> items)
     {
-        List<ItemResponse> itemsResponses = new ArrayList<ItemResponse>();
+        List<ItemResponse> itemsResponses = new ArrayList<>();
 
         for (Item i : items) {
             ItemResponse itemresponse = new ItemResponse(i.name, i.sellIn, i.quality, i.basePrice);
@@ -50,7 +52,10 @@ public abstract class ShopInputBoundary {
         }
         shopOutputBoundary.displayInventory(itemsResponses);
     }
-    public int getBalance() {
+
+    public int getBalance()
+    {
         return balance;
     }
+
 }
