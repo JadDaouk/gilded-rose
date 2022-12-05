@@ -1,6 +1,6 @@
 package gildedrose.shop;
 
-import gildedrose.balance.repositories.Balance;
+import gildedrose.BalanceGateway;
 import gildedrose.item.Item;
 import gildedrose.ItemGateway;
 import gildedrose.shop.output.ShopItemResponse;
@@ -16,12 +16,12 @@ public class ShopInteractor implements ShopInputBoundary {
     private ItemGateway itemGateway;
     private ShopOutputBoundary shopOutputBoundary;
 
-    private Balance balance;
+    private BalanceGateway balanceGateway;
 
-    public ShopInteractor(ItemGateway itemGateway, ShopOutputBoundary shopOutputBoundary, Balance balance) {
+    public ShopInteractor(ItemGateway itemGateway, ShopOutputBoundary shopOutputBoundary, BalanceGateway balanceGateway) {
         this.itemGateway = itemGateway;
         this.shopOutputBoundary = shopOutputBoundary;
-        this.balance = balance;
+        this.balanceGateway = balanceGateway;
     }
 
 
@@ -38,13 +38,14 @@ public class ShopInteractor implements ShopInputBoundary {
     public void sellItem(SellItemRequest sellItemRequest) {
         Item item = itemGateway.findItem(sellItemRequest);
         if (item != null) {
+            System.out.println("Item found");
             ArrayList<Item> items = itemGateway.getInventory();
             items.remove(item);
-            Balance.getbalance() += item.getValue();
+            this.balanceGateway.incrementBalance(item.getValue());
             itemGateway.saveInventory(items);
         }
 
-        shopOutputBoundary.displayBalance(balance);
+        shopOutputBoundary.displayBalance(this.balanceGateway.getBalance());
     }
 
     private void convertItemAndDisplay(List<Item> items)
@@ -56,11 +57,6 @@ public class ShopInteractor implements ShopInputBoundary {
             itemsResponses.add(itemresponse);
         }
         shopOutputBoundary.displayInventory(itemsResponses);
-    }
-
-    public int getBalance()
-    {
-        return balance;
     }
 
 }

@@ -15,8 +15,4 @@ public class AggingItem extends Item {
         cielQuality(50);
         floorSellIn(0);
     }
-
-    public int getValue(){
-        return this.getValue();
-    }
 }

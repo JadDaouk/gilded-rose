@@ -9,7 +9,10 @@ public class ShopConsoleView implements ShopOutputBoundary {
         shopItemRespons.forEach(item -> System.out.println(item.name + " " + item.sellIn + " " + item.quality));
     }
 
-    public void displayBalance(int balance) {
+    @Override
+    public void displayBalance(double balance) {
         System.out.println(" --- Display Balance --- ");
         System.out.println("Balance: " + balance);
-    }}
+    }
+
+}

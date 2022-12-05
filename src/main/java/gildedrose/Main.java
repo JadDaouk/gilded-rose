@@ -1,5 +1,6 @@
 package gildedrose;
 
+import gildedrose.balance.repositories.InMemoryBalanceRepository;
 import gildedrose.item.repositories.InMemoryItemsRepository;
 import gildedrose.shop.ShopInteractor;
 import gildedrose.shop.output.ShopConsoleView;
@@ -11,13 +12,11 @@ public class Main {
     public static void main(String[] args) {
 
         ShopOutputBoundary view = new ShopConsoleView();
-        ShopInteractor shop = new ShopInteractor(new InMemoryItemsRepository(), view);
-
-        //shop.shopOutputBoundary.displayInventory();
+        ShopInteractor shop = new ShopInteractor(new InMemoryItemsRepository(), view, new InMemoryBalanceRepository());
 
         shop.updateInventory();
 
-        SellItemRequest sellItemRequest = new SellItemRequest("Generic", 7);
+        SellItemRequest sellItemRequest = new SellItemRequest("Generic", 7, 10);
         shop.sellItem(sellItemRequest);
         shop.sellItem(sellItemRequest);
     }

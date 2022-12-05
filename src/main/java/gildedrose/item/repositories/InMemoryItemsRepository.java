@@ -1,7 +1,6 @@
 package gildedrose.item.repositories;
 
 import gildedrose.ItemGateway;
-import gildedrose.Items.*;
 import gildedrose.item.*;
 import gildedrose.shop.input.SellItemRequest;
 

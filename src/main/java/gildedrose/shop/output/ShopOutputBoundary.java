@@ -8,5 +8,5 @@ public interface ShopOutputBoundary
 
     void displayInventory(List<ShopItemResponse> shopItemRespons);
 
-    void displayBalance(int balance);
+    void displayBalance(double balance);
 }

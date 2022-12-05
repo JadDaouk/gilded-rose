@@ -1,5 +1,9 @@
 package gildedrose;
 
 public interface BalanceGateway {
-    //TODO
+
+    double getBalance();
+
+    void incrementBalance(double balance);
+
 }

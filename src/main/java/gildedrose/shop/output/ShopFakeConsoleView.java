@@ -8,7 +8,8 @@ public class ShopFakeConsoleView implements ShopOutputBoundary {
 
     }
 
-    public void displayBalance(int balance) {
+    @Override
+    public void displayBalance(double balance) {
 
     }
 }

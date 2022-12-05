@@ -3,7 +3,13 @@ package gildedrose.balance.repositories;
 import gildedrose.BalanceGateway;
 
 public class FileBalanceRepository implements BalanceGateway {
+    @Override
+    public double getBalance() {
+        return 0;
+    }
 
-    //TODO
+    @Override
+    public void incrementBalance(double balance) {
+    }
 }
 

@@ -5,8 +5,15 @@ import gildedrose.item.repositories.InMemoryItemsRepository;
 
 public class InMemoryBalanceRepository implements BalanceGateway {
 
-    private InMemoryItemsRepository inMemoryItemsRepository = new InMemoryItemsRepository();
+    private double balance = 0;
+    @Override
+    public double getBalance() {
+        return balance;
+    }
 
-    //TODO
+    @Override
+    public void incrementBalance(double balance) {
+        this.balance += balance;
+    }
 }
 
