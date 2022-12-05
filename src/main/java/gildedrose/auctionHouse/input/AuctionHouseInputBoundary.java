@@ -8,4 +8,8 @@ public interface AuctionHouseInputBoundary {
     boolean isFinish();
 
     void bid(double bidAmount);
+
+    void displayStartAuction();
+    void displayNewAuction();
+    void displayEndAuction();
 }

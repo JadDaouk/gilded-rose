@@ -3,6 +3,7 @@ package gildedrose.shop;
 import gildedrose.BalanceGateway;
 import gildedrose.item.Item;
 import gildedrose.ItemGateway;
+import gildedrose.shop.output.ShopConsoleView;
 import gildedrose.shop.output.ShopItemResponse;
 import gildedrose.shop.input.SellItemRequest;
 import gildedrose.shop.input.ShopInputBoundary;
@@ -14,13 +15,11 @@ import java.util.List;
 public class ShopInteractor implements ShopInputBoundary {
 
     private ItemGateway itemGateway;
-    private ShopOutputBoundary shopOutputBoundary;
-
     private BalanceGateway balanceGateway;
+    public ShopOutputBoundary shopOutputBoundary = new ShopConsoleView();
 
-    public ShopInteractor(ItemGateway itemGateway, ShopOutputBoundary shopOutputBoundary, BalanceGateway balanceGateway) {
+    public ShopInteractor(ItemGateway itemGateway, BalanceGateway balanceGateway) {
         this.itemGateway = itemGateway;
-        this.shopOutputBoundary = shopOutputBoundary;
         this.balanceGateway = balanceGateway;
     }
 
@@ -32,7 +31,7 @@ public class ShopInteractor implements ShopInputBoundary {
         }
         itemGateway.saveInventory(items);
 
-        convertItemAndDisplay(items);
+
     }
 
     public void sellItem(SellItemRequest sellItemRequest) {
@@ -44,19 +43,20 @@ public class ShopInteractor implements ShopInputBoundary {
             this.balanceGateway.incrementBalance(item.getValue());
             itemGateway.saveInventory(items);
         }
-
-        shopOutputBoundary.displayBalance(this.balanceGateway.getBalance());
     }
 
-    private void convertItemAndDisplay(List<Item> items)
-    {
+    public void displayInventory(){
         List<ShopItemResponse> itemsResponses = new ArrayList<>();
-
-        for (Item i : items) {
-            ShopItemResponse itemresponse = new ShopItemResponse(i.getName(), i.getSellIn(), i.getQuality(), i.getValue());
-            itemsResponses.add(itemresponse);
+        for (Item i : itemGateway.getInventory()) {
+            ShopItemResponse shopItemResponse = new ShopItemResponse(i.getName(), i.getSellIn(), i.getQuality(), i.getValue());
+            itemsResponses.add(shopItemResponse);
         }
         shopOutputBoundary.displayInventory(itemsResponses);
     }
+
+    public void displayBalance(){
+        shopOutputBoundary.displayBalance(balanceGateway.getBalance());
+    }
+
 
 }

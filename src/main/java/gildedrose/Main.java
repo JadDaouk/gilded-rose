@@ -1,23 +1,24 @@
 package gildedrose;
 
-import gildedrose.balance.repositories.InMemoryBalanceRepository;
-import gildedrose.item.repositories.InMemoryItemsRepository;
-import gildedrose.shop.ShopInteractor;
-import gildedrose.shop.output.ShopConsoleView;
+import gildedrose.shop.input.ShopConsoleController;
 import gildedrose.shop.input.SellItemRequest;
-import gildedrose.shop.output.ShopOutputBoundary;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        ShopOutputBoundary view = new ShopConsoleView();
-        ShopInteractor shop = new ShopInteractor(new InMemoryItemsRepository(), view, new InMemoryBalanceRepository());
+        ShopConsoleController shopConsoleController = new ShopConsoleController();
 
-        shop.updateInventory();
+        shopConsoleController.shopInteractor.updateInventory();
 
         SellItemRequest sellItemRequest = new SellItemRequest("Generic", 7, 10);
-        shop.sellItem(sellItemRequest);
-        shop.sellItem(sellItemRequest);
+        shopConsoleController.shopInteractor.sellItem(sellItemRequest);
+        shopConsoleController.shopInteractor.sellItem(sellItemRequest);
+//
+//        AuctionHouseOutputBoundary auctionHouseOutputBoundary = new AuctionHouseConsoleView();
+//        AuctionHouseInteractor auctionHouseInteractor = new AuctionHouseInteractor(new AuctionHouseConsoleController(), auctionHouseOutputBoundary, inMemoryItemsRepository , inMemoryBalanceRepository);
+//
+//        auctionHouseInteractor.startAuction(inMemoryItemsRepository.getInventory().get(0));
+
     }
 }

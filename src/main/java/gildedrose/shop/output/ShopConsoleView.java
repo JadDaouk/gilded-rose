@@ -3,10 +3,10 @@ package gildedrose.shop.output;
 import java.util.List;
 
 public class ShopConsoleView implements ShopOutputBoundary {
-
-    public void displayInventory(List<ShopItemResponse> shopItemRespons){
+    @Override
+    public void displayInventory(List<ShopItemResponse> shopItemResponses){
         System.out.println(" --- Display Inventory --- ");
-        shopItemRespons.forEach(item -> System.out.println(item.name + " " + item.sellIn + " " + item.quality));
+        shopItemResponses.forEach(item -> System.out.println(item.name + " " + item.sellIn + " " + item.quality));
     }
 
     @Override

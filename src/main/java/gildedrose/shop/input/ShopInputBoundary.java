@@ -6,4 +6,8 @@ public interface ShopInputBoundary {
 
     void sellItem(SellItemRequest sellItemRequest);
 
+    void displayInventory();
+
+    void displayBalance();
+
 }

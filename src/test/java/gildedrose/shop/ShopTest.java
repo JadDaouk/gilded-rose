@@ -3,7 +3,6 @@ package gildedrose.shop;
 import com.sun.tools.javac.util.Assert;
 import gildedrose.balance.repositories.InMemoryBalanceRepository;
 import gildedrose.item.repositories.InMemoryItemsRepository;
-import gildedrose.shop.output.ShopFakeConsoleView;
 import gildedrose.shop.input.SellItemRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ class ShopTest {
 
         inMemoryItemsRepository = new InMemoryItemsRepository();
         inMemoryBalanceRepository = new InMemoryBalanceRepository();
-        shopInteractor = new ShopInteractor(inMemoryItemsRepository, new ShopFakeConsoleView(), inMemoryBalanceRepository);
+        shopInteractor = new ShopInteractor(inMemoryItemsRepository, inMemoryBalanceRepository);
         shopInteractor.updateInventory();
     }
 
