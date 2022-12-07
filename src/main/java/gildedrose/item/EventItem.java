@@ -1,6 +1,6 @@
 package gildedrose.item;
 
-public class EventItem extends Item {
+public class EventItem extends PerishableItem {
 
     public EventItem(String name, int sellIn, int quality, int basePrice) {
         super(name, sellIn, quality, basePrice);

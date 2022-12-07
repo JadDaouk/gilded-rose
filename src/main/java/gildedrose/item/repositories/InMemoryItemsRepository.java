@@ -16,7 +16,7 @@ public class InMemoryItemsRepository implements ItemGateway {
         items.add(new GenericItem("Generic", 5, 0, 10));
         items.add(new AggingItem("Aged Brie", 5, 5, 10));
         items.add(new AggingItem("Aged Brie", 5, 50, 10));
-        items.add(new LegendaryItem("Sulfuras", 5, 80, 10));
+        items.add(new LegendaryItem("Sulfuras",  80, 10));
         items.add(new EventItem("Backstage passes", 15, 10, 10));
         items.add(new EventItem("Backstage passes", 10, 10, 10));
         items.add(new EventItem("Backstage passes", 5, 10, 10));

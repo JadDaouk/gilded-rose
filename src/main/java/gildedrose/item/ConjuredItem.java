@@ -1,6 +1,6 @@
 package gildedrose.item;
 
-public class ConjuredItem extends Item {
+public class ConjuredItem extends PerishableItem {
 
 
     public ConjuredItem(String name, int sellIn, int quality, int basePrice) {

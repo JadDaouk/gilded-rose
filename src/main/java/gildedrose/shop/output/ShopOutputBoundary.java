@@ -6,7 +6,7 @@ import java.util.List;
 public interface ShopOutputBoundary
 {
 
-    void displayInventory(List<ShopItemResponse> shopItemRespons);
+    void displayInventory(List<ShopPerishableItemResponse> shopPerishableItemResponse, List<ShopItemResponse> shopItemResponse);
 
     void displayBalance(double balance);
 }

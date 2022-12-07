@@ -2,12 +2,7 @@ package gildedrose.item;
 
 public class LegendaryItem extends Item{
 
-    public LegendaryItem(String name, int sellIn, int quality, int basePrice) {
-        super(name, sellIn, quality, basePrice);
-    }
-
-    public void update()
-    {
-        // rien
+    public LegendaryItem(String name, int quality, int basePrice) {
+        super(name, quality, basePrice);
     }
 }

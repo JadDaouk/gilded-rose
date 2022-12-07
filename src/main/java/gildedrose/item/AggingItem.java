@@ -1,7 +1,6 @@
 package gildedrose.item;
 
-public class AggingItem extends Item {
-
+public class AggingItem extends PerishableItem {
 
     public AggingItem(String name, int sellIn, int quality, int basePrice) {
         super(name, sellIn, quality, basePrice);

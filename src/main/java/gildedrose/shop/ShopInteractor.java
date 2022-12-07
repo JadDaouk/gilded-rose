@@ -3,8 +3,10 @@ package gildedrose.shop;
 import gildedrose.BalanceGateway;
 import gildedrose.item.Item;
 import gildedrose.ItemGateway;
+import gildedrose.item.PerishableItem;
 import gildedrose.shop.output.ShopConsoleView;
 import gildedrose.shop.output.ShopItemResponse;
+import gildedrose.shop.output.ShopPerishableItemResponse;
 import gildedrose.shop.input.SellItemRequest;
 import gildedrose.shop.input.ShopInputBoundary;
 import gildedrose.shop.output.ShopOutputBoundary;
@@ -27,7 +29,9 @@ public class ShopInteractor implements ShopInputBoundary {
     public void updateInventory() {
         ArrayList<Item> items = itemGateway.getInventory();
         for (Item item : items) {
-            item.update();
+            if(item instanceof PerishableItem perishableItem) {
+                perishableItem.update();
+            }
         }
         itemGateway.saveInventory(items);
 
@@ -37,7 +41,6 @@ public class ShopInteractor implements ShopInputBoundary {
     public void sellItem(SellItemRequest sellItemRequest) {
         Item item = itemGateway.findItem(sellItemRequest);
         if (item != null) {
-            System.out.println("Item found");
             ArrayList<Item> items = itemGateway.getInventory();
             items.remove(item);
             this.balanceGateway.incrementBalance(item.getValue());
@@ -46,12 +49,17 @@ public class ShopInteractor implements ShopInputBoundary {
     }
 
     public void displayInventory(){
-        List<ShopItemResponse> itemsResponses = new ArrayList<>();
-        for (Item i : itemGateway.getInventory()) {
-            ShopItemResponse shopItemResponse = new ShopItemResponse(i.getName(), i.getSellIn(), i.getQuality(), i.getValue());
-            itemsResponses.add(shopItemResponse);
+        List<ShopPerishableItemResponse> perishableItemsResponses = new ArrayList<>();
+        List<ShopItemResponse> shopItemResponses = new ArrayList<>();
+        for (Item item : itemGateway.getInventory()) {
+            if(item instanceof PerishableItem perishableItem) {
+                ShopPerishableItemResponse shopPerishableItemResponse = new ShopPerishableItemResponse(perishableItem.getName(), perishableItem.getSellIn(), perishableItem.getQuality(), perishableItem.getValue());
+                perishableItemsResponses.add(shopPerishableItemResponse);
+            }
+            ShopItemResponse shopItemResponse = new ShopItemResponse(item.getName(), item.getQuality(), item.getValue());
+            shopItemResponses.add(shopItemResponse);
         }
-        shopOutputBoundary.displayInventory(itemsResponses);
+        shopOutputBoundary.displayInventory(perishableItemsResponses, shopItemResponses);
     }
 
     public void displayBalance(){
