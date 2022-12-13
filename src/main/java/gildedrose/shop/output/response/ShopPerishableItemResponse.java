@@ -1,4 +1,4 @@
-package gildedrose.shop.output;
+package gildedrose.shop.output.response;
 
 public class ShopPerishableItemResponse {
     public String name;

@@ -1,8 +1,9 @@
 package gildedrose.item;
 
-public class LegendaryItem extends Item{
+public class LegendaryItem extends ImprovableItem{
 
-    public LegendaryItem(String name, int quality, int basePrice) {
-        super(name, quality, basePrice);
+    public LegendaryItem(String name, int quality, int basePrice, int attack, int defense) {
+        super(name, quality, basePrice, attack, defense);
     }
+
 }

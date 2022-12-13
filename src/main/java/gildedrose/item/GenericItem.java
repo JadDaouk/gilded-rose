@@ -1,9 +1,9 @@
 package gildedrose.item;
 
-public class GenericItem extends PerishableItem {
+public class GenericItem extends PerishableImprovableItem {
 
-    public GenericItem(String name, int sellIn, int quality, int basePrice) {
-        super(name, sellIn, quality, basePrice);
+    public GenericItem(String name, int sellIn, int quality, int basePrice, int attack, int defense) {
+        super(name, sellIn, quality, basePrice, attack, defense);
     }
 
     public void update() {

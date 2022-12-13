@@ -1,7 +1,7 @@
 package gildedrose;
 
 import gildedrose.item.Item;
-import gildedrose.shop.input.SellItemRequest;
+import gildedrose.shop.input.request.SellItemRequest;
 
 import java.util.ArrayList;
 

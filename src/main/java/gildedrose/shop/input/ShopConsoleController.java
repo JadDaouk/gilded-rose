@@ -3,6 +3,7 @@ package gildedrose.shop.input;
 import gildedrose.balance.repositories.InMemoryBalanceRepository;
 import gildedrose.item.repositories.InMemoryItemsRepository;
 import gildedrose.shop.ShopInteractor;
+import gildedrose.shop.input.request.SellItemRequest;
 
 
 public class ShopConsoleController {

@@ -1,24 +1,32 @@
 package gildedrose;
 
-import gildedrose.shop.input.ShopConsoleController;
-import gildedrose.shop.input.SellItemRequest;
+import gildedrose.auctionHouse.AuctionHouseInteractor;
+import gildedrose.auctionHouse.input.AuctionHouseConsoleController;
+import gildedrose.balance.repositories.InMemoryBalanceRepository;
+import gildedrose.item.repositories.InMemoryItemsRepository;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        ShopConsoleController shopConsoleController = new ShopConsoleController();
+        // shopConsoleController = new ShopConsoleController();
 
-        shopConsoleController.shopInteractor.updateInventory();
+        //shopConsoleController.shopInteractor.updateInventory();
 
-        SellItemRequest sellItemRequest = new SellItemRequest("Generic", 7, 10);
-        shopConsoleController.shopInteractor.sellItem(sellItemRequest);
-        shopConsoleController.shopInteractor.sellItem(sellItemRequest);
+        //SellItemRequest sellItemRequest = new SellItemRequest("Generic", 7, 10);
+        //shopConsoleController.shopInteractor.sellItem(sellItemRequest);
+        //shopConsoleController.shopInteractor.sellItem(sellItemRequest);
 //
-//        AuctionHouseOutputBoundary auctionHouseOutputBoundary = new AuctionHouseConsoleView();
-//        AuctionHouseInteractor auctionHouseInteractor = new AuctionHouseInteractor(new AuctionHouseConsoleController(), auctionHouseOutputBoundary, inMemoryItemsRepository , inMemoryBalanceRepository);
-//
-//        auctionHouseInteractor.startAuction(inMemoryItemsRepository.getInventory().get(0));
+        //AuctionHouseInteractor auctionHouseInteractor;
+        //InMemoryItemsRepository inMemoryItemsRepository;
+        //InMemoryBalanceRepository inMemoryBalanceRepository;
+        ///inMemoryBalanceRepository = new InMemoryBalanceRepository();
+        ///inMemoryItemsRepository = new InMemoryItemsRepository();
+        //auctionHouseInteractor = new AuctionHouseInteractor(inMemoryItemsRepository,inMemoryBalanceRepository);
+        AuctionHouseConsoleController actionHouseConsoleController = new AuctionHouseConsoleController();
+        actionHouseConsoleController.console();
+
+
 
     }
 }

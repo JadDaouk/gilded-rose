@@ -5,6 +5,8 @@ public abstract class Item {
 
     protected String name;
     protected int quality;
+
+
     protected int basePrice;
 
 
@@ -13,7 +15,6 @@ public abstract class Item {
         this.quality = quality;
         this.basePrice = basePrice;
     }
-
 
 
     protected void cielQuality(int quality) {
@@ -46,5 +47,6 @@ public abstract class Item {
     public int getValue() {
         return this.basePrice;
     }
+
 
 }

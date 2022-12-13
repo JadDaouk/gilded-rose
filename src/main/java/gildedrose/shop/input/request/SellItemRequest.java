@@ -1,4 +1,4 @@
-package gildedrose.shop.input;
+package gildedrose.shop.input.request;
 
 public class SellItemRequest {
 
@@ -22,10 +22,6 @@ public class SellItemRequest {
 
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
 }

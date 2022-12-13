@@ -3,7 +3,7 @@ package gildedrose.shop;
 import gildedrose.balance.repositories.InMemoryBalanceRepository;
 import gildedrose.item.PerishableItem;
 import gildedrose.item.repositories.InMemoryItemsRepository;
-import gildedrose.shop.input.SellItemRequest;
+import gildedrose.shop.input.request.SellItemRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
