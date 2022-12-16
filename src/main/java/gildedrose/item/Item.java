@@ -7,13 +7,9 @@ public abstract class Item {
     protected int quality;
 
 
-    protected int basePrice;
-
-
-    protected Item(String name, int quality, int basePrice) {
+    protected Item(String name, int quality) {
         this.name = name;
         this.quality = quality;
-        this.basePrice = basePrice;
     }
 
 
@@ -42,10 +38,6 @@ public abstract class Item {
 
     public void setQuality(int quality) {
         this.quality = quality;
-    }
-
-    public int getValue() {
-        return this.basePrice;
     }
 
 

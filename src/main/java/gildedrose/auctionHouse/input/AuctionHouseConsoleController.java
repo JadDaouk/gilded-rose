@@ -2,6 +2,7 @@ package gildedrose.auctionHouse.input;
 
 import gildedrose.auctionHouse.AuctionHouseInteractor;
 import gildedrose.balance.repositories.InMemoryBalanceRepository;
+import gildedrose.item.SalableItem;
 import gildedrose.item.repositories.InMemoryItemsRepository;
 
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class AuctionHouseConsoleController {
 
         //TODO: implement console
 
-        auctionHouseInteractor.startAuction(inMemoryItemsRepository.getInventory().get(1));
+        auctionHouseInteractor.startAuction((SalableItem) inMemoryItemsRepository.getInventory().get(1));
 
     }
 

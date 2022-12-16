@@ -3,6 +3,7 @@ package gildedrose.auctionHouse;
 import gildedrose.balance.repositories.InMemoryBalanceRepository;
 import gildedrose.item.GenericItem;
 import gildedrose.item.Item;
+import gildedrose.item.SalableItem;
 import gildedrose.item.repositories.InMemoryItemsRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,18 +32,16 @@ public class AuctionHouseTest {
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
-
-    //TODO: Write tests for AuctionHouseInteractor
     @Test
     void canSell() {
-        auctionHouseInteractor.startAuction(inMemoryItemsRepository.getInventory().get(1));
+        auctionHouseInteractor.startAuction((SalableItem) inMemoryItemsRepository.getInventory().get(1));
         Assertions.assertEquals(13.31, round(inMemoryBalanceRepository.getBalance(), 2));
     }
 
     @Test
     void cantSell() {
-        Item item = new GenericItem("Generic", 5, 800, 10, 1, 0);
-        auctionHouseInteractor.startAuction(item);
+        SalableItem salableItem = new GenericItem("Generic", 5, 800, 10, 1, 0);
+        auctionHouseInteractor.startAuction(salableItem);
         Assertions.assertEquals(0, inMemoryBalanceRepository.getBalance());
     }
 

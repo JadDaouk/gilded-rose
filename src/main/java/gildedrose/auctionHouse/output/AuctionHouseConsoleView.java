@@ -1,10 +1,11 @@
 package gildedrose.auctionHouse.output;
 
 import gildedrose.item.Item;
+import gildedrose.item.SalableItem;
 
 public class AuctionHouseConsoleView implements AuctionHouseOutputBoundary {
 
-    public void displayStartAuction(Item auctionItem)
+    public void displayStartAuction(SalableItem auctionItem)
     {
 
         System.out.println("Début des enchères");

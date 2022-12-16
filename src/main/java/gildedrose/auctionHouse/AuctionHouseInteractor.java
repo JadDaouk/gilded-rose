@@ -1,15 +1,13 @@
 package gildedrose.auctionHouse;
 
 import gildedrose.BalanceGateway;
-import gildedrose.auctionHouse.input.AuctionHouseConsoleController;
 import gildedrose.auctionHouse.output.AuctionHouseConsoleView;
 import gildedrose.auctionHouse.output.AuctionHouseOutputBoundary;
 import gildedrose.item.Item;
 import gildedrose.auctionHouse.input.AuctionHouseInputBoundary;
 import gildedrose.ItemGateway;
+import gildedrose.item.SalableItem;
 import gildedrose.shop.input.request.SellItemRequest;
-
-import java.util.Scanner;
 
 public class AuctionHouseInteractor implements AuctionHouseInputBoundary {
 
@@ -28,7 +26,7 @@ public class AuctionHouseInteractor implements AuctionHouseInputBoundary {
     }
 
     @Override
-    public void startAuction(Item auctionItem) {
+    public void startAuction(SalableItem auctionItem) {
 
         auctionHouseOutputBoundary.displayStartAuction(auctionItem);
 
@@ -60,11 +58,11 @@ public class AuctionHouseInteractor implements AuctionHouseInputBoundary {
         return round == maxRound;
     }
 
-    public boolean canSell(Item auctionItem)
+    public boolean canSell(SalableItem auctionItem)
     {
         SellItemRequest sellItemRequest = new SellItemRequest(auctionItem.getName(), auctionItem.getQuality(), auctionItem.getValue());
         Item result = itemGateway.findItem(sellItemRequest);
-        return result == null ? false : true;
+        return result != null;
     }
 
 }

@@ -1,10 +1,11 @@
 package gildedrose.auctionHouse.output;
 
 import gildedrose.item.Item;
+import gildedrose.item.SalableItem;
 
 public interface AuctionHouseOutputBoundary {
 
-    void displayStartAuction(Item auctionItem);
+    void displayStartAuction(SalableItem auctionItem);
 
     void displayNewAuction(double bidAmount);
 

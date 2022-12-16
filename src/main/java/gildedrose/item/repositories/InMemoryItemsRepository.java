@@ -24,6 +24,7 @@ public class InMemoryItemsRepository implements ItemGateway {
         items.add(new ConjuredItem("Generic Conjured", 5, 10, 10, 1, 0));
         items.add(new ConjuredItem("Generic Conjured", 0, 10, 10, 1, 0));
         items.add(new GenericItem("Generic to Sell", 5, 8, 10, 1, 0));
+        items.add(new RelicItem("Relic", 5));
     }
 
     public ArrayList<Item> getInventory() {

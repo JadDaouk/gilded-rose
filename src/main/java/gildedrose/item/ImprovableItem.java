@@ -1,6 +1,6 @@
 package gildedrose.item;
 
-public abstract class ImprovableItem extends Item {
+public abstract class ImprovableItem extends SalableItem {
 
     protected int attack;
     protected int defense;

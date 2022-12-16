@@ -97,25 +97,35 @@ class ShopTest {
     }
 
     @Test
+    void should_UpdateRelicItem() {
+        Assertions.assertEquals(100, inMemoryBalanceRepository.getBalance());
+    }
+
+    @Test
     void should_NotSellItemIfNotInInventory() {
         SellItemRequest sellItemRequest = new SellItemRequest("Not in Inventory", 7, 10);
         shopInteractor.sellItem(sellItemRequest);
-        Assertions.assertEquals(0, inMemoryBalanceRepository.getBalance());
+        Assertions.assertEquals(100, inMemoryBalanceRepository.getBalance());
     }
 
     @Test
     void should_NotSellItemIfNotCouponQuality() {
         SellItemRequest sellItemRequest = new SellItemRequest("Generic to Sell", 2, 10);
         shopInteractor.sellItem(sellItemRequest);
-        Assertions.assertEquals(0, inMemoryBalanceRepository.getBalance());
+        Assertions.assertEquals(100, inMemoryBalanceRepository.getBalance());
     }
+
 
     @Test
     void should_SellItem() {
         SellItemRequest sellItemRequest = new SellItemRequest("Generic to Sell", 7, 10);
         shopInteractor.sellItem(sellItemRequest);
-        Assertions.assertEquals(10, inMemoryBalanceRepository.getBalance());
+        Assertions.assertEquals(110, inMemoryBalanceRepository.getBalance());
         Assertions.assertTrue(inMemoryItemsRepository.getInventory().stream().noneMatch(item -> item.getName().equals("Generic to Sell") && item.getQuality() == 7));
     }
+
+
+
+
 
 }

@@ -1,6 +1,6 @@
 package gildedrose.item;
 
-public abstract class PerishableItem extends Item {
+public abstract class PerishableItem extends SalableItem implements UpdatableItem  {
 
     protected int sellIn;
 

@@ -1,16 +1,10 @@
 package gildedrose.shop;
 
 import gildedrose.BalanceGateway;
-import gildedrose.item.ImprovableItem;
-import gildedrose.item.Item;
+import gildedrose.item.*;
 import gildedrose.ItemGateway;
-import gildedrose.item.PerishableImprovableItem;
-import gildedrose.item.PerishableItem;
 import gildedrose.shop.output.ShopConsoleView;
-import gildedrose.shop.output.response.ShopImprovableItemResponse;
-import gildedrose.shop.output.response.ShopItemResponse;
-import gildedrose.shop.output.response.ShopPerishableImprovableItemResponse;
-import gildedrose.shop.output.response.ShopPerishableItemResponse;
+import gildedrose.shop.output.response.*;
 import gildedrose.shop.input.request.SellItemRequest;
 import gildedrose.shop.input.ShopInputBoundary;
 import gildedrose.shop.output.ShopOutputBoundary;
@@ -36,6 +30,9 @@ public class ShopInteractor implements ShopInputBoundary {
             if (item instanceof PerishableItem perishableItem) {
                 perishableItem.update();
             }
+            else if (item instanceof RelicItem relicItem) {
+                balanceGateway.incrementBalance(relicItem.getValue());
+            }
         }
         itemGateway.saveInventory(items);
 
@@ -44,10 +41,10 @@ public class ShopInteractor implements ShopInputBoundary {
 
     public void sellItem(SellItemRequest sellItemRequest) {
         Item item = itemGateway.findItem(sellItemRequest);
-        if (item != null) {
+        if (item instanceof SalableItem salableItem) {
             ArrayList<Item> items = itemGateway.getInventory();
             items.remove(item);
-            this.balanceGateway.incrementBalance(item.getValue());
+            this.balanceGateway.incrementBalance(salableItem.getValue());
             itemGateway.saveInventory(items);
         }
     }
@@ -55,6 +52,7 @@ public class ShopInteractor implements ShopInputBoundary {
     public void displayInventory() {
         List<ShopPerishableItemResponse> shopPerishableItemResponses = new ArrayList<>();
         List<ShopItemResponse> shopItemResponses = new ArrayList<>();
+        List<ShopSalableItemResponse> shopSalableItemResponses = new ArrayList<>();
         List<ShopPerishableImprovableItemResponse> shopPerishableImprovableItemResponses = new ArrayList<>();
         List<ShopImprovableItemResponse> shopImprovableItemResponses = new ArrayList<>();
         for (Item item : itemGateway.getInventory()) {
@@ -67,16 +65,20 @@ public class ShopInteractor implements ShopInputBoundary {
                     shopPerishableItemResponses.add(shopPerishableItemResponse);
                 }
             }
-            if (item instanceof ImprovableItem improvableItem) {
+            else if (item instanceof ImprovableItem improvableItem) {
                 ShopImprovableItemResponse shopImprovableItem = new ShopImprovableItemResponse(improvableItem.getName(), improvableItem.getQuality(), improvableItem.getValue(), improvableItem.getAttack(), improvableItem.getDefense());
                 shopImprovableItemResponses.add(shopImprovableItem);
-            } else {
-                ShopItemResponse shopItemResponse = new ShopItemResponse(item.getName(), item.getQuality(), item.getValue());
+            }
+            else if (item instanceof SalableItem salableItem) {
+                ShopSalableItemResponse shopSalableItemResponse = new ShopSalableItemResponse(salableItem.getName(), salableItem.getQuality(), salableItem.getValue());
+                shopSalableItemResponses.add(shopSalableItemResponse);
+            }else {
+                ShopItemResponse shopItemResponse = new ShopItemResponse(item.getName(), item.getQuality());
                 shopItemResponses.add(shopItemResponse);
             }
 
         }
-        shopOutputBoundary.displayInventory(shopPerishableItemResponses, shopItemResponses, shopPerishableImprovableItemResponses, shopImprovableItemResponses);
+        shopOutputBoundary.displayInventory(shopPerishableItemResponses, shopItemResponses, shopPerishableImprovableItemResponses, shopImprovableItemResponses, shopSalableItemResponses);
     }
 
     public void displayBalance() {
