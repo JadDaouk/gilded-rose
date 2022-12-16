@@ -18,14 +18,9 @@ public class AuctionHouseConsoleController {
     public void console(){
 
         //TODO: implement console
-        auctionHouseInteractor.controller = this;
-        // ici ou main / test ?
+
         auctionHouseInteractor.startAuction(inMemoryItemsRepository.getInventory().get(1));
 
     }
 
-    public int getBidAmount()
-    {
-        return sc.nextInt();
-    }
 }

@@ -7,6 +7,7 @@ import gildedrose.auctionHouse.output.AuctionHouseOutputBoundary;
 import gildedrose.item.Item;
 import gildedrose.auctionHouse.input.AuctionHouseInputBoundary;
 import gildedrose.ItemGateway;
+import gildedrose.shop.input.request.SellItemRequest;
 
 import java.util.Scanner;
 
@@ -16,12 +17,10 @@ public class AuctionHouseInteractor implements AuctionHouseInputBoundary {
     private ItemGateway itemGateway;
 
     public AuctionHouseOutputBoundary auctionHouseOutputBoundary = new AuctionHouseConsoleView();
-    public AuctionHouseConsoleController controller;
 
-    private Item item;
     private static final int maxRound = 3;
     private int round = 0;
-    private double bidAmount = 0;
+    private static final double bid = 1.1;
 
     public AuctionHouseInteractor(ItemGateway itemGateway, BalanceGateway balanceGateway) {
         this.itemGateway = itemGateway;
@@ -31,30 +30,29 @@ public class AuctionHouseInteractor implements AuctionHouseInputBoundary {
     @Override
     public void startAuction(Item auctionItem) {
 
-        item = auctionItem;
-
         auctionHouseOutputBoundary.displayStartAuction(auctionItem);
 
-        double currentPrice = auctionItem.getValue();
+        if(canSell(auctionItem))
+        {
+            double currentPrice = auctionItem.getValue();
 
-        while (!isFinish()) {
-            do
-            {
-                auctionHouseOutputBoundary.displayNewAuctionTxt();
-                bidAmount = controller.getBidAmount();
+            while (!isFinish()) {
+                currentPrice = currentPrice * bid;
 
+                auctionHouseOutputBoundary.displayNewAuction(currentPrice);
+                round++;
             }
-            while (!isGoodBidAmount(currentPrice));
 
-            auctionHouseOutputBoundary.displayNewAuction(bidAmount);
-            currentPrice = bidAmount;
-            round++;
+            auctionHouseOutputBoundary.displayEndAuction(auctionItem, currentPrice);
+
+            itemGateway.getInventory().remove(auctionItem);
+            balanceGateway.incrementBalance(currentPrice);
+        }
+        else
+        {
+            auctionHouseOutputBoundary.displayCancelAuction();
         }
 
-        auctionHouseOutputBoundary.displayEndAuction(item, bidAmount);
-
-        itemGateway.getInventory().remove(auctionItem);
-        balanceGateway.incrementBalance(currentPrice);
     }
 
     @Override
@@ -62,48 +60,11 @@ public class AuctionHouseInteractor implements AuctionHouseInputBoundary {
         return round == maxRound;
     }
 
-    private boolean isGoodBidAmount(double currentPrice)
+    public boolean canSell(Item auctionItem)
     {
-        boolean result = false;
-        if(round == 0) // La première enchère peut être au prix de l'objet vendu
-            result = bidAmount >= currentPrice;
-        else
-            result = bidAmount > currentPrice * 1.1;
-
-        if(!result)
-        {
-            auctionHouseOutputBoundary.displayBadAuction();
-        }
-        return result;
+        SellItemRequest sellItemRequest = new SellItemRequest(auctionItem.getName(), auctionItem.getQuality(), auctionItem.getValue());
+        Item result = itemGateway.findItem(sellItemRequest);
+        return result == null ? false : true;
     }
 
-    public double newBidAuction()
-    {
-        return 0;
-    }
-
-  //  //TODO: voir pour plutot créer la fonction bid dans auctionHouseOutputBoundary et gérer l'accès comme les fonctions display
-  ///  @Override
-  //  public void bid(double bidAmount) {
-  //  }
-//        double proposePrice = auctionHouseConsoleController.getProposePrice(bidAmount);
-//        if (proposePrice > bidAmount) {
-//            this.bidAmount = proposePrice;
-//
-//            auctionHouseOutputBoundary.displayNewAuction(proposePrice);
-//        }
-//    }
-
-   // @Override
-   // public void displayStartAuction(){
-   //     auctionHouseOutputBoundary.displayStartAuction(null);
-   // }
-   // @Override
-   // public void displayNewAuction(){
-   //     auctionHouseOutputBoundary.displayNewAuction(bidAmount);
-   // }
-   // @Override
-   // public void displayEndAuction(){
-   //     auctionHouseOutputBoundary.displayEndAuction(item, bidAmount);
-   // }
 }
