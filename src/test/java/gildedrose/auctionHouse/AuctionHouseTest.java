@@ -1,5 +1,6 @@
 package gildedrose.auctionHouse;
 
+import gildedrose.auctionHouse.output.AuctionHouseConsoleView;
 import gildedrose.balance.repositories.InMemoryBalanceRepository;
 import gildedrose.item.GenericItem;
 import gildedrose.item.Item;
@@ -22,7 +23,7 @@ public class AuctionHouseTest {
     void setup() {
         inMemoryBalanceRepository = new InMemoryBalanceRepository();
         inMemoryItemsRepository = new InMemoryItemsRepository();
-        auctionHouseInteractor = new AuctionHouseInteractor(inMemoryItemsRepository,inMemoryBalanceRepository);
+        auctionHouseInteractor = new AuctionHouseInteractor(inMemoryItemsRepository,inMemoryBalanceRepository, new AuctionHouseConsoleView());
     }
 
     public static double round(double value, int places) {

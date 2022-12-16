@@ -4,6 +4,7 @@ import gildedrose.balance.repositories.InMemoryBalanceRepository;
 import gildedrose.item.PerishableItem;
 import gildedrose.item.repositories.InMemoryItemsRepository;
 import gildedrose.shop.input.request.SellItemRequest;
+import gildedrose.shop.output.ShopConsoleView;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class ShopTest {
 
         inMemoryItemsRepository = new InMemoryItemsRepository();
         inMemoryBalanceRepository = new InMemoryBalanceRepository();
-        shopInteractor = new ShopInteractor(inMemoryItemsRepository, inMemoryBalanceRepository);
+        shopInteractor = new ShopInteractor(inMemoryItemsRepository, inMemoryBalanceRepository, new ShopConsoleView());
         shopInteractor.updateInventory();
     }
 
@@ -31,7 +32,6 @@ class ShopTest {
         {
             Assertions.assertEquals(4, perishableItem.getSellIn());
         }
-        //todo: peut etre faire un assert pour LegendaryItem (pas de mise à jour)
         Assertions.assertEquals(7, inMemoryItemsRepository.getInventory().get(0).getQuality());
     }
 

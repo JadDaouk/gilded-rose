@@ -20,8 +20,4 @@ public class SellItemRequest {
         return quality;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
 }

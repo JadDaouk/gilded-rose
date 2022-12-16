@@ -14,20 +14,22 @@ public class AuctionHouseInteractor implements AuctionHouseInputBoundary {
     private BalanceGateway balanceGateway;
     private ItemGateway itemGateway;
 
-    public AuctionHouseOutputBoundary auctionHouseOutputBoundary = new AuctionHouseConsoleView();
+    public AuctionHouseOutputBoundary auctionHouseOutputBoundary;
 
     private static final int maxRound = 3;
-    private int round = 0;
+    private int round;
     private static final double bid = 1.1;
 
-    public AuctionHouseInteractor(ItemGateway itemGateway, BalanceGateway balanceGateway) {
+    public AuctionHouseInteractor(ItemGateway itemGateway, BalanceGateway balanceGateway, AuctionHouseOutputBoundary auctionHouseOutputBoundary) {
         this.itemGateway = itemGateway;
         this.balanceGateway = balanceGateway;
+        this.auctionHouseOutputBoundary = auctionHouseOutputBoundary;
     }
 
     @Override
     public void startAuction(SalableItem auctionItem) {
 
+        initAuction();
         auctionHouseOutputBoundary.displayStartAuction(auctionItem);
 
         if(canSell(auctionItem))
@@ -63,6 +65,11 @@ public class AuctionHouseInteractor implements AuctionHouseInputBoundary {
         SellItemRequest sellItemRequest = new SellItemRequest(auctionItem.getName(), auctionItem.getQuality(), auctionItem.getValue());
         Item result = itemGateway.findItem(sellItemRequest);
         return result != null;
+    }
+
+    private void initAuction()
+    {
+        round = 0;
     }
 
 }

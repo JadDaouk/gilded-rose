@@ -7,25 +7,9 @@ import java.util.List;
 public class ShopConsoleView implements ShopOutputBoundary {
 
     @Override
-    public void displayInventory(List<ShopPerishableItemResponse> shopPerishableItemResponse, List<ShopItemResponse> shopItemResponse, List<ShopPerishableImprovableItemResponse> shopPerishableImprovableItemResponse, List<ShopImprovableItemResponse> shopImprovableItemResponse, List<ShopSalableItemResponse> shopSalableItemResponse) {
+    public void displayInventory(List<ShopItemResponse> shopItemResponse) {
         System.out.println(" --- Display Inventory --- ");
-        shopPerishableImprovableItemResponse.forEach(item -> {
-            System.out.println("_> " + item.name + ", quality: " + item.quality + ", sell in: " + item.sellIn + ", properties: attack " + item.attack + "/ defense " + item.defense);
-        });
-        shopPerishableItemResponse.forEach(item -> {
-            System.out.println("_> " + item.name +  ", quality: " + item.quality + ", sell in: " + item.sellIn);
-        });
-        shopImprovableItemResponse.forEach(item -> {
-            System.out.println("_> " + item.name + ", quality: " + item.quality + ", properties: attack " + item.attack + "/ defense " + item.defense);
-        });
-        shopSalableItemResponse.forEach(item -> {
-            System.out.println("_> " + item.name +  ", quality: " + item.quality);
-
-        });
-        shopItemResponse.forEach(item -> {
-            System.out.println("_> " + item.name +  ", quality: " + item.quality);
-
-        });
+        shopItemResponse.forEach(item -> System.out.println("_> " + item.name + ", quality: " + item.quality));
     }
 
     @Override
